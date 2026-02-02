@@ -7,6 +7,7 @@
   <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="styles.css">
 
   <title>Frontend Mentor | IP Address Tracker</title>
 
@@ -24,27 +25,29 @@
 </head>
 
 <body>
-  <header>
+  <header class="header">
     <h1>IP Address Tracker</h1>
-    <input type="text" id="ipInput" placeholder="Search for any IP address or domain">
-    <button id=searchBtn></Search> Search</button>
+    <form class="search-container" id="search-form">
+      <label for="ip-input" class="visually-hidden"></label>
+      <input type="text" id="ip-input" placeholder="Search for any IP address or domain">
+      <button id=search-btn></Search>></button>
   </header>
+  <main class="data-dashboard">
+    <div class="api-info">
+      <p><strong>IP</strong> <span id="ip"></span></p>
+      <p><strong>Location</strong> <span id="location"></span></p>
+      <p><strong>Timezone</strong> <span id="timezone"></span></p>
+      <p><strong>ISP</strong> <span id="isp"></span></p>
+    </div>
+  </main>
+  <div id="map" class="map-container"></div>
+  <script src="script.js"></script>
 
-  <div id="info">
-    <p><span id="ip">IP Address</span></p>
-    <p><span id="location">Location</span></p>
-    <p><span id="timezone">Time Zone</span></p>
-    <p><span id="isp">ISP</span></p>
-  </div>
-<div id="map"></div>
 
-  <!-- UTC add offset value dynamically using the API -->
-
-
-  <div class="attribution">
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </div> -->
 </body>
 
 </html>

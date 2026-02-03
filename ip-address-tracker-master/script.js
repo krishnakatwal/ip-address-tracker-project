@@ -7,6 +7,8 @@ const ip = document.getElementById("ip");
 const location = document.getElementById("location");
 const timezone = document.getElementById("timezone");
 const isp = document.getElementById("isp");
+const input = document.getElementById("input");
+const searchForm = document.getElementById("search-form");
 
 //map intialization  setup
 const map = L.map("map").setView([51.505, -0.09], 13);
@@ -19,15 +21,6 @@ L.marker([51.5, -0.09])
   .addTo(map)
   .bindPopup("A pretty CSS popup.<br> Easily customizable.")
   .openPopup();
-
-// searchBtn.addEventListener("click", () => {
-//   const ip = ipInput.value.trim();
-//   if (!ip) {
-//     alert("please enter an valid ip address");
-//     return;
-//   }
-//   fetch;
-// });
 
 //fetch api info
 async function getIPData(targetIP = "") {
@@ -65,3 +58,33 @@ searchBtn.addEventListener("click", () => {
 });
 //fetch IP on the page load
 getIPData();
+
+function ipAddressValidation() {
+  const ipRegex =
+    /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
+  const value = ipInput.value.trim();
+  if (ipInput.validity.typeMismatch) {
+    ipInput.setCustomValidity("Please enter a valid IP Addresss");
+  } else if (ipInput.validity.valueMissing) {
+    ipInput.setCustomValidity("enter the valid Ip Address");
+  } else if (!ipRegex.test(value)) {
+    ipInput.setCustomValidity(
+      "Please enter a valid IP address (e.g. 192.168.1.1)",
+    );
+  } else {
+    ipInput.setCustomValidity(""); // Clear custom error if valid
+  }
+  // Display the custom message or clear it
+  input.textContent = customEmailInput.validationMessage;
+} //Event listner to validate ip address input
+ipInput.addEventListener("input", ipAddressValidation);
+
+//
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault(); // Stop the default form submission
+  ipAddressValidation();
+  if (!ipInput.checkValidity()) return;
+
+  getIPData(ipInput.value);
+  searchForm.reset();
+});

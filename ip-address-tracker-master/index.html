@@ -6,13 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- displays site properly based on user's device -->
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="styles.css">
+ 
 
   <title>Frontend Mentor | IP Address Tracker</title>
+   <script src="./script.js" defer type="module"></script>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
+  <!-- <style>
     .attribution {
       font-size: 11px;
       text-align: center;
@@ -21,7 +30,7 @@
     .attribution a {
       color: hsl(228, 45%, 44%);
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
@@ -30,18 +39,19 @@
     <form class="search-container" id="search-form">
       <label for="ip-input" class="visually-hidden"></label>
       <input type="text" id="ip-input" placeholder="Search for any IP address or domain">
-      <button id=search-btn></Search>></button>
+      <button type="submit" id=search-btn></Search>></button>
+      <img src="./images/icon-arrow.svg">
   </header>
   <main class="data-dashboard">
     <div class="api-info">
-      <p><strong>IP</strong> <span id="ip"></span></p>
+      <p><strong>IP Address</strong> <span id="ip"></span></p>
       <p><strong>Location</strong> <span id="location"></span></p>
       <p><strong>Timezone</strong> <span id="timezone"></span></p>
       <p><strong>ISP</strong> <span id="isp"></span></p>
     </div>
   </main>
   <div id="map" class="map-container"></div>
-  <script src="script.js"></script>
+  
 
 
   <!-- <div class="attribution">

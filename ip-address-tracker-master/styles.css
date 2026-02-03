@@ -16,6 +16,7 @@ body {
   text-align: center;
   position: relative;
   z-index: 2; /*ensure dashboard overlay works.*/
+   background-image: url(images/pattern-bg-desktop.png);
 }
 .search-container {
   display: flex;
@@ -24,6 +25,7 @@ body {
   width: 100%;
   max-width: 500px;
   margin: 15px auto 0 auto;
+  
 }
 #ip-input {
   padding: 10px 20px;
@@ -40,6 +42,7 @@ body {
   border: none;
   border-radius: 0 8px 8px 0;
   cursor: pointer;
+ 
 }
 #search-btn:hover {
   background-color: lightslategrey;

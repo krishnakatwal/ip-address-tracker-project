@@ -12,12 +12,14 @@ const searchForm = document.getElementById("search-form");
 
 //map intialization  setup
 const map = L.map("map").setView([51.505, -0.09], 13);
+
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-L.marker([51.5, -0.09])
+// let marker = L.marker([51.5, -0.09]).addTo(map);
+let marker = L.marker([51.5, -0.09])
   .addTo(map)
   .bindPopup("A pretty CSS popup.<br> Easily customizable.")
   .openPopup();
@@ -37,6 +39,7 @@ async function getIPData(targetIP = "") {
     }
 
     renderUI(data);
+    updateMapPosition(data.location.lat, data.location.lng);
   } catch (error) {
     alert("Error fetching api data");
     console.error(error);
@@ -50,15 +53,16 @@ function renderUI(data) {
   isp.textContent = data.isp;
 }
 
-//event listner
-searchBtn.addEventListener("click", () => {
-  const ip = ipInput.value.trim();
-  getIPData(ip);
-  console.log(getIPData(ip));
-});
-//fetch IP on the page load
-getIPData();
+//update map
+function updateMapPosition(lat, lng) {
+  // Center the map on new coordinates
+  map.setView([lat, lng], 13);
 
+  // Update the existing marker's position instead of creating a new one
+  marker.setLatLng([lat, lng]);
+}
+
+// IP Validation
 function ipAddressValidation() {
   const ipRegex =
     /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
@@ -75,7 +79,7 @@ function ipAddressValidation() {
     ipInput.setCustomValidity(""); // Clear custom error if valid
   }
   // Display the custom message or clear it
-  input.textContent = customEmailInput.validationMessage;
+  input.textContent = ipInput.validationMessage;
 } //Event listner to validate ip address input
 ipInput.addEventListener("input", ipAddressValidation);
 

@@ -12,6 +12,12 @@ const isp = document.getElementById("isp");
 const input = document.getElementById("input");
 const searchForm = document.getElementById("search-form");
 
+//Map Initialization with Custom Icon
+let customIcon = L.icon({
+  iconUrl: "./images/icon-location.svg",
+  iconSize: [40, 40], // Width and height in pixels
+  iconAnchor: [20, 40], //The tip of the pin (half-width, full-height)
+});
 //map intialization  setup
 const map = L.map("map").setView([51.505, -0.09], 13);
 
@@ -21,7 +27,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // let marker = L.marker([51.5, -0.09]).addTo(map);
-let marker = L.marker([51.5, -0.09]).addTo(map);
+let marker = L.marker([51.5, -0.09], { icon: customIcon }).addTo(map);
 // .bindPopup("A pretty CSS popup.<br> Easily customizable.")
 // .openPopup();
 
@@ -41,7 +47,7 @@ async function getIPData(targetIP = "") {
     renderUI(data);
     updateMapPosition(data.location.lat, data.location.lng);
   } catch (error) {
-    if (error instanceof InvalidIPError) alert("Invalid IP or domain!");
+    if (error instanceof InvalidIPError) alert("Invalid IP!");
     else if (error instanceof APIError) alert("API error: " + error.message);
     else alert("Unknown error occurred!");
   }

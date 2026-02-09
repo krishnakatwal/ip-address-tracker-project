@@ -1,4 +1,6 @@
 import { API_KEY } from "./secret.js";
+import { InvalidIPError } from "./errorHandler.js";
+import { APIError } from "./errorHandler.js";
 
 const ipInput = document.getElementById("ip-input");
 const searchBtn = document.getElementById("search-btn");
@@ -19,10 +21,9 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // let marker = L.marker([51.5, -0.09]).addTo(map);
-let marker = L.marker([51.5, -0.09])
-  .addTo(map)
-  .bindPopup("A pretty CSS popup.<br> Easily customizable.")
-  .openPopup();
+let marker = L.marker([51.5, -0.09]).addTo(map);
+// .bindPopup("A pretty CSS popup.<br> Easily customizable.")
+// .openPopup();
 
 //fetch api info
 async function getIPData(targetIP = "") {
@@ -34,15 +35,15 @@ async function getIPData(targetIP = "") {
     console.log(data);
 
     if (data.code) {
-      alert("Invalid Ip ");
-      return;
+      throw new InvalidIPError("Invalid IP A ddress");
     }
 
     renderUI(data);
     updateMapPosition(data.location.lat, data.location.lng);
   } catch (error) {
-    alert("Error fetching api data");
-    console.error(error);
+    if (error instanceof InvalidIPError) alert("Invalid IP or domain!");
+    else if (error instanceof APIError) alert("API error: " + error.message);
+    else alert("Unknown error occurred!");
   }
 }
 //render page info

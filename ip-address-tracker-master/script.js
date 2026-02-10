@@ -18,7 +18,8 @@ let customIcon = L.icon({
   iconSize: [40, 40], // Width and height in pixels
   iconAnchor: [20, 40], //The tip of the pin (half-width, full-height)
 });
-//map intialization  setup
+
+//Map intialization  setup
 const map = L.map("map").setView([51.505, -0.09], 13);
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -31,7 +32,7 @@ let marker = L.marker([51.5, -0.09], { icon: customIcon }).addTo(map);
 // .bindPopup("A pretty CSS popup.<br> Easily customizable.")
 // .openPopup();
 
-//fetch api info
+//Fetch api info
 async function getIPData(targetIP = "") {
   try {
     const response = await fetch(
@@ -50,9 +51,11 @@ async function getIPData(targetIP = "") {
     if (error instanceof InvalidIPError) alert("Invalid IP!");
     else if (error instanceof APIError) alert("API error: " + error.message);
     else alert("Unknown error occurred!");
+  } finally {
+    input.textContent = "";
   }
 }
-//render page info
+//Render page info
 function renderUI(data) {
   ip.textContent = data.ip;
   location.textContent = `${data.location.city},${data.location.region}`;
@@ -60,7 +63,7 @@ function renderUI(data) {
   isp.textContent = data.isp;
 }
 
-//update map
+//Update map
 function updateMapPosition(lat, lng) {
   // Center the map on new coordinates
   map.setView([lat, lng], 13);

@@ -48,4 +48,4 @@ Enter an IP address or domain in the search input, and view the results in the f
 
 live Demo: https://ip-address-tracker-app-krishna.netlify.app/
 
-![alt text](Screenshot-ip-tracker-2.png)
+![alt text](ip-address-tracker-master/images/Screenshot-ip-tracker.png)

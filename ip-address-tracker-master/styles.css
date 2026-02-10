@@ -148,18 +148,18 @@ body {
   .data-dashboard {
     top: 150px; /* adjust for smaller header */
 
-  .api-info {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 20px;
-  }
+    .api-info {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 20px;
+    }
 
-  .info-group {
-    padding: 0;
-  }
+    .info-group {
+      padding: 0;
+    }
 
-  .info-group:not(:last-child) {
-    border-right: none;
+    .info-group:not(:last-child) {
+      border-right: none;
+    }
   }
-
-  
+}
